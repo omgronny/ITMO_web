@@ -1,0 +1,136 @@
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="UTF-8"> 
+<title>Web Lab 1</title>
+<style>
+
+table {
+   border: 1px solid grey;
+   width: 100%;
+}
+
+th {
+   font-size: 200%;
+   background-color: #32b494;
+   border: 1px solid grey;
+}
+
+td {
+   background-color: #384349;
+   color: #ebedee;
+   border: 1px solid grey;
+}
+
+img {
+	width: 100%;
+	
+}
+
+</style>
+
+</head>
+
+<body style = "background-color: #384349;">
+
+<table>
+<caption style="color: #ebedee; background-color: #384349; padding: 40px; font-size: 300%; font-family: "Fira Sans","Tahoma",sans-serif;">
+Глинских Роман P3212. Вариант 12006
+</caption>
+
+<tr><th id="elem" width="70%">Поле ввода</th><th width="30%">График</th></tr>
+<tr><td>
+<form name="testForm" id="testForm" action="script.php" method="GET" class="parametersForm">
+  <p><b>Ваше имя:</b><br>
+   <input type="text" id="name" name="name" size="40">
+  </p>
+    <p><b>Параметр R:</b>
+    <p><input type="radio" name="par_r" value="1" size="40">1</p>
+    <p><input type="radio" name="par_r" value="1.5" size="40">1.5</p>
+    <p><input type="radio" name="par_r" value="2" size="40">2</p>
+    <p><input type="radio" name="par_r" value="2.5" size="40">2.5</p>
+    <p><input type="radio" name="par_r" value="3" size="40">3</p>
+  </p><p><b>Координата У:</b><br>
+   <input type="text" id="y" name="par_y" class="only_number" size="40">
+  </p><p><b>Координата Х:</b><br>
+   <input type="submit" id="x1" name="par_x" value="-4" class="validateBtn" size="40">
+   <input type="submit" id="x2" name="par_x" value="-3" class="validateBtn" size="40">
+   <input type="submit" id="x3" name="par_x" value="-2" class="validateBtn" size="40">
+   <input type="submit" id="x4" name="par_x" value="-1" class="validateBtn" size="40">
+   <input type="submit" id="x5" name="par_x" value="0" class="validateBtn" size="40">
+   <input type="submit" id="x6" name="par_x" value="1" class="validateBtn" size="40">
+   <input type="submit" id="x7" name="par_x" value="2" class="validateBtn" size="40">
+   <input type="submit" id="x8" name="par_x" value="3" class="validateBtn" size="40">
+   <input type="submit" id="x9" name="par_x" value="4" class="validateBtn" size="40">
+  </p>
+</form>
+
+	<script>
+
+	document.testForm.onsubmit = function() {
+
+		
+		const par_y = document.getElementById('y');		// validate y!!
+
+		let radios = document.querySelectorAll('input[type="radio"]');
+		
+
+		for (let radio of radios) {
+			if (radio.checked) {
+				var r = (radio.value);
+			}
+		}
+		
+		
+		
+
+		if (isNaN(r)) {	
+		
+			alert("Введите параметр r");
+			
+			return false;
+		
+		}
+		
+		
+		
+		if (isNaN(par_y.value)) {			// check inf
+		
+			alert("Параметр Y не является числом");
+			
+			return false;
+		
+		}
+		
+		
+		
+		
+		if ((par_y.value >= 3) || (par_y.value <= -5)) {
+		
+			alert("Вы ввели слишком большое абсолютное значение параметра Y. Введите число в интервале (-5;3)");
+			return false;
+		
+		}
+
+
+	}
+
+	</script>
+
+</td><td><img src="data/func.png"></td></tr>
+
+</table>
+</body>
+
+<script>
+/*
+document.getElementById("y").onkeypress= function(event){
+ event= event || window.event;
+ if (event.charCode && (event.charCode != 190) && (event.charCode < 48 || event.charCode > 57))
+  return false;
+};
+ 
+*/ 
+</script>
+
+</html>
