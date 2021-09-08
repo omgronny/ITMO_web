@@ -1,8 +1,0 @@
-   <input type="submit" id="x2" name="par_x" value="-3" class="validateBtn" size="40">
-   <input type="submit" id="x3" name="par_x" value="-2" class="validateBtn" size="40">
-   <input type="submit" id="x4" name="par_x" value="-1" class="validateBtn" size="40">
-   <input type="submit" id="x5" name="par_x" value="0" class="validateBtn" size="40">
-   <input type="submit" id="x6" name="par_x" value="1" class="validateBtn" size="40">
-   <input type="submit" id="x7" name="par_x" value="2" class="validateBtn" size="40">
-   <input type="submit" id="x8" name="par_x" value="3" class="validateBtn" size="40">
-   <input type="submit" id="x9" name="par_x" value="4" class="validateBtn" size="40">
