@@ -55,6 +55,7 @@ caption:first-letter {
 <tr><td>Время работы скрипта</td><td> X </td><td>Y</td><td>R</td><td>Результат</td></tr>
 <?php
 
+
 $script_time_begin = (float)microtime();
 
 $valid_pars_for_r=array(1,2,1.5,2.5,3);
@@ -129,26 +130,38 @@ if ($res) {
 
 $script_time_end = (float)microtime();
 $script_time_res = $script_time_end - $script_time_begin;
-$script_time_res = number_format($script_time_res, 10, ',', ' ');
+$script_time_res = number_format($script_time_res, 10, '.', ' ');
 $newstr="<tr><td>".$script_time_res."</td><td>$par_x</td><td>$par_y</td><td>$par_r</td><td>$str_res</td></tr>";
 
-$str = file_get_contents("data/results.txt");
+$file = @fopen("data/results.txt", "r");
+
+$str = "";
+while (($buffer = fgets($file, 4096)) !== false) {
+    $strs = explode(",", $buffer);
+    $str .= "<tr><td>".$strs[0]."</td><td>".$strs[1]."</td><td>".$strs[2]."</td><td>".$strs[3]."</td><td>".$strs[4].$strs[5]."</td></tr>";
+}
+fclose($file);
+
 echo $newstr;
 echo $str;
 
-$newstr.=$str;
+$csv_str="".$script_time_res.",$par_x,$par_y,$par_r,$str_res\n";
+$csv_str.=file_get_contents("data/results.txt");
+
 $fp = fopen("data/results.txt", "w");
-$test = fwrite($fp, $newstr);
+$test = fwrite($fp, $csv_str);
 fclose($fp);
 
 echo "</table>";
 
 
-date_default_timezone_set('UTC3');
+date_default_timezone_set('Europe/Moscow');
 $time = (string)date('l jS \of F Y h:i:s A');
 echo "<h3><now_time>$time</now_time><h3>";
 
+
 }
+
 
 ?>
 
