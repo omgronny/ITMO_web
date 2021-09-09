@@ -24,7 +24,32 @@ td {
 
 img {
 	width: 100%;
-	
+}
+
+.head {
+	color: #ebedee;
+	background-color: #384349;
+	padding: 40px;
+	font-size: 300%;
+	font-family: fantasy;
+}
+
+caption:first-letter {
+	color: orange;
+}
+
+table input {
+	margin: 5px;
+}
+
+caption pars {
+	color: orange;
+}
+
+not_valid {
+	text-align: center;
+	font-size: 150%;
+	color: red;
 }
 
 </style>
@@ -34,7 +59,7 @@ img {
 <body style = "background-color: #384349;">
 
 <table>
-<caption style="color: #ebedee; background-color: #384349; padding: 40px; font-size: 300%; font-family: "Fira Sans","Tahoma",sans-serif;">
+<caption class="head">
 Глинских Роман P3212. Вариант 12006
 </caption>
 
@@ -42,7 +67,7 @@ img {
 <tr><td>
 <form name="testForm" id="testForm" action="script.php" method="GET" class="parametersForm">
   <p><b>Ваше имя:</b><br>
-   <input type="text" id="name" name="name" size="40">
+   <input style="margin: 10px;" type="text" id="name" name="name" size="40">
   </p>
     <p><b>Параметр R:</b>
     <p><input type="radio" name="par_r" value="1" size="40">1</p>
@@ -50,8 +75,10 @@ img {
     <p><input type="radio" name="par_r" value="2" size="40">2</p>
     <p><input type="radio" name="par_r" value="2.5" size="40">2.5</p>
     <p><input type="radio" name="par_r" value="3" size="40">3</p>
+	<p id="vald_r"></p>
   </p><p><b>Координата У:</b><br>
    <input type="text" id="y" name="par_y" class="only_number" size="40">
+   <p id="vald_y"></p>
   </p><p><b>Координата Х:</b><br>
    <input type="submit" id="x1" name="par_x" value="-4" class="validateBtn" size="40">
    <input type="submit" id="x2" name="par_x" value="-3" class="validateBtn" size="40">
@@ -85,8 +112,20 @@ img {
 		
 
 		if (isNaN(r)) {	
+			
+			let valid_r = document.querySelector('#valid_r');
+			elem.innerHTML = '<not_valid>Введите параметр r</not_valid>';
+			
+			
+			return false;
 		
-			alert("Введите параметр r");
+		}
+		
+		
+		if (par_y.value === "") {	
+			
+			let valid_y = document.querySelector('#valid_y');
+			elem.innerHTML = '<not_valid>Введите параметр y</not_valid>';
 			
 			return false;
 		
@@ -94,9 +133,10 @@ img {
 		
 		
 		
-		if (isNaN(par_y.value)) {			// check inf
+		if (isNaN(par_y.value)) {
 		
-			alert("Параметр Y не является числом");
+			let valid_y = document.querySelector('#valid_y');
+			elem.innerHTML = '<not_valid>Введите числовой параметр y</not_valid>';
 			
 			return false;
 		
@@ -107,7 +147,9 @@ img {
 		
 		if ((par_y.value >= 3) || (par_y.value <= -5)) {
 		
-			alert("Вы ввели слишком большое абсолютное значение параметра Y. Введите число в интервале (-5;3)");
+			let valid_r = document.querySelector('#valid_y');
+			elem.innerHTML = '<not_valid> Введите Y в интервале (-5;3)</not_valid>';
+			
 			return false;
 		
 		}
@@ -117,20 +159,9 @@ img {
 
 	</script>
 
-</td><td><img src="data/func.png"></td></tr>
+</td><td><img src="data/funk1.png"></td></tr>
 
 </table>
 </body>
-
-<script>
-/*
-document.getElementById("y").onkeypress= function(event){
- event= event || window.event;
- if (event.charCode && (event.charCode != 190) && (event.charCode < 48 || event.charCode > 57))
-  return false;
-};
- 
-*/ 
-</script>
 
 </html>

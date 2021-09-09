@@ -35,14 +35,20 @@ now_time {
 	color: orange;
 }
 
+caption:first-letter {
+	color: orange;
+}
+
+
+
 </style>
 </head>
 
 <body style = "background-color: #384349;">
 
 <table>
-<caption style="color: #ebedee;  background-color: #384349; padding: 40px; font-size: 300%;">
-Глинских Роман P3212. Вариант 12006
+<caption style="color: #ebedee;  background-color: #384349; padding: 40px; font-family: fantasy; font-size: 300%;">
+Глинских Роман P3212. Вариант <pars>12006</pars>
 </caption>
 
 <tr><th colspan="5" width="70%">Результат</th></tr>
@@ -50,8 +56,6 @@ now_time {
 <?php
 
 $script_time_begin = (float)microtime();
-
-$str = file_get_contents("data/results.txt");
 
 $valid_pars_for_r=array(1,2,1.5,2.5,3);
 
@@ -128,6 +132,7 @@ $script_time_res = $script_time_end - $script_time_begin;
 $script_time_res = number_format($script_time_res, 10, ',', ' ');
 $newstr="<tr><td>".$script_time_res."</td><td>$par_x</td><td>$par_y</td><td>$par_r</td><td>$str_res</td></tr>";
 
+$str = file_get_contents("data/results.txt");
 echo $newstr;
 echo $str;
 
