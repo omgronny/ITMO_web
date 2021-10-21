@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="points.GraphPoint" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,7 +82,7 @@
 
     <tr><th id="elem" width="70%">Input field</th><th id="graph" width="30%">Coordinate System</th></tr>
     <tr><td>
-        <form name="testForm" id="testForm" action="AreaCheckServlet" method="POST" class="parametersForm">
+        <form name="testForm" id="testForm" action="ControllerServlet" method="POST" class="parametersForm">
 
             <input type="hidden" id="x_click" name="par_x_click" size="40">
             <input type="hidden" id="y_click" name="par_y_click" size="40">

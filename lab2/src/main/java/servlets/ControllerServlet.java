@@ -31,14 +31,40 @@ public class ControllerServlet extends HttpServlet {
 
     }
 
-
-    private void execute(HttpServletRequest request, HttpServletResponse response) {
+    private void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         response.setContentType("text/html");
 
-        String receiver = request.getParameterMap().isEmpty() ? "/test.jsp" : "/AreaCheckServlet";
+        String receiver = "/test.jsp";
+
+        if (request.getParameter("par_y") != null && request.getParameter("par_x") != null
+                && request.getParameterValues("par_r[]") != null && request.getParameterValues("par_r[]").length != 0 && validator(request)) {
+            receiver = "/AreaCheckServlet";
+        }
+
         getServletContext().getRequestDispatcher(receiver).forward(request, response);
 
+    }
+
+    private boolean validator(HttpServletRequest request) {
+
+        try {
+            Double.parseDouble(request.getParameter("par_y"));
+            Double.parseDouble(request.getParameter("par_x"));
+
+            String [] rs = request.getParameterValues("par_r[]");
+
+            for (String strR : rs) {
+
+                double r = Double.parseDouble(strR);
+
+            }
+
+            return true;
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }

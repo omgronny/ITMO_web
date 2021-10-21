@@ -1,14 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="points.ValidPoint" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String res = "";
-    for (int i = 0; i < ((ArrayList<String>) request.getAttribute("rs")).size(); ++i) {
 
-        res += ("<tr><td>" + ((ArrayList<String>) request.getAttribute("times")).get(i) + "</td><td>" + ((ArrayList<String>) request.getAttribute("xs")).get(i) + " </td> <td>"
-                + ((ArrayList<String>) request.getAttribute("ys")).get(i) + "</td> <td>" + ((ArrayList<String>) request.getAttribute("rs")).get(i) + "</td> <td>"
-                + ((ArrayList<String>) request.getAttribute("corrects")).get(i) + "</td></tr>");
+    ArrayList<ValidPoint> validPoints = (ArrayList<ValidPoint>) session.getAttribute("points");
 
-    }
+
 %>
 <html>
 <head>
@@ -64,7 +62,15 @@
 
     <tr><th colspan="4" width="70%">Result</th><th><a style="color: black" href="test.jsp">One more attempt</a> </th></tr>
     <tr><td>Time of running </td><td> X </td><td>Y</td><td>R</td><td>Result</td></tr>
-    <%= res %>
+
+    <% for (ValidPoint validPoint : validPoints) { %>
+    <tr>
+        <td> <%= validPoint.getTime() %> </td>
+        <td> <%= validPoint.getX() %></td>
+        <td> <%= validPoint.getY() %> </td>
+        <td> <%= validPoint.getR() %> </td>
+        <td> <%= validPoint.getResult() %> </td></tr>
+    <% } %>
 
 </table>
 

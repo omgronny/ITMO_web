@@ -1,5 +1,8 @@
 package servlets;
 
+import points.GraphPoint;
+import points.ValidPoint;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Time;
@@ -18,15 +22,17 @@ import java.util.Arrays;
 @WebServlet(value = "/AreaCheckServlet")
 public class AreaCheckServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         execute(request, response);
-
+        
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+
         execute(request, response);
+
 
     }
 
@@ -38,27 +44,24 @@ public class AreaCheckServlet extends HttpServlet {
         double par_x;
         boolean isClick;
 
+        double par_y_click = 0.0;
+        double par_x_click = 0.0;
+
+        par_y = Double.parseDouble(request.getParameter("par_y"));
+        par_x = Double.parseDouble(request.getParameter("par_x"));
+        isClick = false;
+
         if (request.getParameter("par_y_click") != null && !request.getParameter("par_y_click").equals("")) {
-            par_y = Double.parseDouble(request.getParameter("par_y_click"));
-            par_x = Double.parseDouble(request.getParameter("par_x_click"));
+            par_y_click = Double.parseDouble(request.getParameter("par_y_click"));
+            par_x_click = Double.parseDouble(request.getParameter("par_x_click"));
             isClick = true;
-        } else {
-            par_y = Double.parseDouble(request.getParameter("par_y"));
-            par_x = Double.parseDouble(request.getParameter("par_x"));
-            isClick = false;
         }
 
         String [] rs = request.getParameterValues("par_r[]");
 
         HttpSession session = request.getSession();
-        ArrayList<String> arxNonBeaut = new ArrayList<>();              // все + все некрасивые
-        ArrayList<String> aryNonBeaut = new ArrayList<>();
-        ArrayList<String> arr = new ArrayList<>();
-        ArrayList<String> arres = new ArrayList<>();
-        ArrayList<String> times = new ArrayList<>();
-
-        ArrayList<String> arxBeaut = new ArrayList<>();             // все + все красивые
-        ArrayList<String> aryBeaut = new ArrayList<>();
+        ArrayList<ValidPoint> thisPoints = new ArrayList<>();
+        ArrayList<GraphPoint> thisGraphPoints = new ArrayList<>();
 
         for (String strR : rs) {
 
@@ -67,56 +70,38 @@ public class AreaCheckServlet extends HttpServlet {
             double x_beaut = par_x;
             double y_beaut = par_y;
 
-            if (isClick) {
-                x_beaut = ( (double) Math.round( ( (par_x - 225) / 180*r ) *10 ) ) / 10;
-                y_beaut = ( (double) Math.round( ( (par_y - 200) / ((-1)*180)*r )*10) ) / 10;
-            }
-
-            arxNonBeaut.add(String.valueOf(par_x));
-            aryNonBeaut.add(String.valueOf(par_y));
-            arxBeaut.add(String.valueOf(x_beaut));
-            aryBeaut.add(String.valueOf(y_beaut));
-            arr.add(strR);
-            arres.add(validator(x_beaut, y_beaut, r));
-
             long finish = System.currentTimeMillis();
             long elapsed = finish - start;
-            times.add((elapsed + 1) + " ms");
 
+            ValidPoint point = new ValidPoint(x_beaut, y_beaut, r, validator(x_beaut, y_beaut, r), elapsed+1);
+            thisPoints.add(point);
 
-        }
-
-        if (session.getAttribute("arX") != null) {
-
-            arxBeaut.addAll((ArrayList<String>) session.getAttribute("arX"));
-            aryBeaut.addAll((ArrayList<String>) session.getAttribute("arY"));
-
-            arxNonBeaut.addAll((ArrayList<String>) session.getAttribute("arXnonKras"));
-            aryNonBeaut.addAll((ArrayList<String>) session.getAttribute("arYnonKras"));
-
-            arr.addAll((ArrayList<String>) session.getAttribute("arR"));
-            arres.addAll((ArrayList<String>) session.getAttribute("arRes"));
-
-            times.addAll((ArrayList<String>) session.getAttribute("times"));
+            if (isClick) {
+                GraphPoint graphPoint = new GraphPoint(par_x_click, par_y_click, r);
+                thisGraphPoints.add(graphPoint);
+            }
 
         }
 
-        session.setAttribute("arX", arxBeaut);
-        session.setAttribute("arY", aryBeaut);
+        if (session.getAttribute("points") != null) {
 
-        session.setAttribute("arXnonKras", arxNonBeaut);
-        session.setAttribute("arYnonKras", aryNonBeaut);
+            ArrayList<ValidPoint> validPoints = (ArrayList<ValidPoint>) session.getAttribute("points");
+            thisPoints.addAll(validPoints);
 
-        session.setAttribute("arR", arr);
-        session.setAttribute("arRes", arres);
+        }
 
-        session.setAttribute("times", times);
+        if (isClick && session.getAttribute("clicks") != null) {
 
-        request.setAttribute("xs", arxBeaut);
-        request.setAttribute("ys", aryBeaut);
-        request.setAttribute("rs", arr);
-        request.setAttribute("corrects", arres);
-        request.setAttribute("times", times);
+            ArrayList<GraphPoint> graphPoints = (ArrayList<GraphPoint>) session.getAttribute("clicks");
+            thisGraphPoints.addAll(graphPoints);
+
+        }
+
+        session.setAttribute("points", thisPoints);
+
+        if (isClick) {
+            session.setAttribute("clicks", thisGraphPoints);
+        }
 
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/result.jsp");
