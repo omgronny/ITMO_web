@@ -19,28 +19,25 @@ public class ControllerServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-//        response.setContentType("text/html");
-//        // Hello
-//        PrintWriter out = response.getWriter();
-//        out.println("<html><body>");
-//        out.println("<h1>" + "get" + "</h1>");
-//        out.println("</body></html>");
-
-        doPost(request, response);
+        execute(request, response);
 
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 
+        execute(request, response);
+
+
+    }
+
+
+    private void execute(HttpServletRequest request, HttpServletResponse response) {
+
         response.setContentType("text/html");
 
         String receiver = request.getParameterMap().isEmpty() ? "/test.jsp" : "/AreaCheckServlet";
         getServletContext().getRequestDispatcher(receiver).forward(request, response);
-
-
-
-
 
     }
 

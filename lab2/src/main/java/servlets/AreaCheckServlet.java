@@ -20,16 +20,17 @@ public class AreaCheckServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        response.setContentType("text/html");
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + "get" + "</h1>");
-        out.println("</body></html>");
+        execute(request, response);
 
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        execute(request, response);
+
+    }
+
+    private void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         long start = System.currentTimeMillis();
 
