@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<h:head>
+
+    <title>Web Lab 3</title>
+    <h:outputStylesheet>
+
+        table {
+            border: 1px solid grey;
+            width: 100%;
+        }
+
+        th {
+            font-size: 200%;
+            background-color: #32b494;
+            border: 1px solid grey;
+        }
+
+        td {
+            background-color: #384349;
+            color: #ebedee;
+            border: 1px solid grey;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .head {
+            color: #ebedee;
+            background-color: #384349;
+            padding: 40px;
+            font-size: 300%;
+            font-family: fantasy;
+        }
+
+        table input {
+            margin: 5px;
+        }
+
+        caption pars {
+            color: orange;
+        }
+
+        not_valid {
+            text-align: center;
+            font-size: 150%;
+            color: red;
+        }
+
+        #x1,#x2,#x3,#x4,#x5,#x6,#x7,#x8,#x9 {
+            background-color: orange
+        }
+
+        numbers {
+            color: orange;
+        }
+
+        #circle {
+        }
+
+        .timer {
+            text-align: center;
+        }
+
+    </h:outputStylesheet>
+
+</h:head>
+
+<h:body style = "background-color: #384349;">
+
+
+    <table>
+    <caption class="head">
+        Roman Glinskikh <numbers>P3212</numbers>. Variant <numbers>12029</numbers>
+    </caption>
+
+    <tr><th id="elem" width="70%">Welcome</th><th id="graph" width="30%">Go to the main page</th></tr>
+    <tr><td>
+
+        <span id="date"></span>
+
+        <canvas id="circle" width="400" height="400"></canvas>
+        <h:outputScript library="javascript" name="time.js"></h:outputScript>
+
+    </td><td class="element">
+
+        <h:form>
+            <h:commandButton style="background-color: orange; width: 100px" label="Go to action" value="Go to action" action="#{userController.verifyUser}"/>
+        </h:form>
+
+    </td></tr>
+
+    </table>
+</h:body>
+
+</html>

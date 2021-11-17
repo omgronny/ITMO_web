@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<h:head>
+
+    <title>Web Lab 2</title>
+    <h:outputStylesheet>
+
+        table {
+            border: 1px solid grey;
+            width: 100%;
+        }
+
+        th {
+            font-size: 200%;
+            background-color: #32b494;
+            border: 1px solid grey;
+        }
+
+        td {
+            background-color: #384349;
+            color: #ebedee;
+            border: 1px solid grey;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .head {
+            color: #ebedee;
+            background-color: #384349;
+            padding: 40px;
+            font-size: 300%;
+            font-family: fantasy;
+        }
+
+        table input {
+            margin: 5px;
+        }
+
+        caption pars {
+            color: orange;
+        }
+
+        not_valid {
+            text-align: center;
+            font-size: 150%;
+            color: red;
+        }
+
+        #x1,#x2,#x3,#x4,#x5,#x6,#x7,#x8,#x9 {
+            background-color: orange
+        }
+
+        numbers {
+            color: orange;
+        }
+
+        #circle {
+        }
+
+        .timer {
+            text-align: center;
+        }
+
+    </h:outputStylesheet>
+
+</h:head>
+
+<h:body style = "background-color: #384349;">
+
+    <table>
+    <caption class="head">
+        Roman Glinskikh <numbers>P3212</numbers>. Variant <numbers>12029</numbers>
+    </caption>
+    <tr><th id="elem" width="60%">Input field</th><th id="graph" width="30%"><h:form name="back" id="back">
+        <h:commandButton style="background-color: orange; width: 100px" value="Go back" action="index"/>
+    </h:form></th></tr>
+    <tr><td>
+
+        <h:form name="testForm" id="newEmployeeForm" class="parametersForm">
+
+            <div>
+<!--                <p:slider for="x" display="output" minValue="0" maxValue="5" value="#{helloBean.validPoint.x}" />-->
+<!--                <p:slider id="x" minValue="0" maxValue="5" value="#{helloBean.validPoint.x}" />-->
+                <h:outputLabel for="x" value="X Coordinate"/>
+                <p:inputText style="margin-left: 10px" id="x" value="#{helloBean.validPoint.x}"/>
+                <p:slider for="x" style="width: 200px; margin-left: 100px; margin-top: 10px" minValue="-5" maxValue="5" step="0.1"/>
+            </div>
+            <div>
+                <h:outputLabel for="y" value="Y Coordinate"/>
+                <h:inputText id="y" name="par_y" style="width: 200px; margin-left: 10px" class="only_number" size="40" value="#{helloBean.validPoint.y}"/>
+            </div>
+            <div>
+                <h:outputLabel style="margin-top: 20px" for="r" value="Parameter R" />
+                <h:selectOneMenu onchange=" f() " style="margin-left: 15px" id="r" value="#{helloBean.validPoint.r}">
+                    <f:selectItem itemValue = "5" itemLabel = "5" />
+                    <f:selectItem itemValue = "4" itemLabel = "4" />
+                    <f:selectItem itemValue = "3" itemLabel = "3" />
+                    <f:selectItem itemValue = "2" itemLabel = "2" />
+                    <f:selectItem itemValue = "1" itemLabel = "1" />
+                </h:selectOneMenu>
+            </div>
+
+            <button type="button"  style="margin-top: 100px; background-color: orange; width: 100px" id="fakesubbutton" onclick="validator()">
+            Submit</button>
+
+            <h:commandButton style="margin-top: 100px; background-color: orange; visibility: hidden" id="subbutton" value="Submit" action="#{helloBean.addPoint()}">
+                <f:ajax execute="newEmployeeForm" render="employeeTable" />
+            </h:commandButton>
+            <h:commandButton style="margin-top: 100px; background-color: orange; visibility: hidden" id="changebutton" value="Submit" action="#{helloBean.pointValidator()}">
+                <f:ajax execute="newEmployeeForm" render="changeresult" />
+            </h:commandButton>
+
+        </h:form>
+
+        <h:outputScript library="javascript" name="validator.js"></h:outputScript>
+
+    </td><td class="element">
+
+        <canvas id="circle"></canvas>
+
+        <h:outputScript library="javascript" name="artist.js"></h:outputScript>
+
+        <h:outputScript library="javascript" name="changer.js"></h:outputScript >
+
+        <h:outputScript library="javascript" name="clicker.js"></h:outputScript>
+
+
+    </td></tr>
+
+</table>
+
+    <h:panelGroup id="employeeTable">
+        <h:dataTable style="text-align: center" value="#{helloBean.validPoints}" var="validPoint">
+            <h:column>
+                <f:facet name="header">
+                    <h:form name="cleaner" id="cleaner">
+                        <button type="button" id="fakecleaner" style="background-color: orange; width: 100px" onclick="cleanpoints()">Clean</button>
+                        <h:commandButton style="visibility: hidden" id="cleanTap" action="#{helloBean.clean()}" value="Submit">
+                            <f:ajax render="employeeTable"/>
+                        </h:commandButton>
+                    <h:outputScript library="javascript" name="cleaner.js"></h:outputScript>
+                </h:form>
+                </f:facet>
+                #{validPoint.time}
+            </h:column>
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{validPoint.x}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{validPoint.y}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{validPoint.r}
+            </h:column>
+            <h:column>
+                <f:facet name="header" width="30%">result</f:facet>
+                #{validPoint.result}
+            </h:column>
+        </h:dataTable>
+
+    </h:panelGroup>
+
+
+</h:body>
+
+</html>
