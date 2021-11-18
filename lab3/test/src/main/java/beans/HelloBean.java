@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @ManagedBean
-@ApplicationScoped
+@SessionScoped
 public class HelloBean  {
 
     private ValidPoint validPoint = new ValidPoint();
