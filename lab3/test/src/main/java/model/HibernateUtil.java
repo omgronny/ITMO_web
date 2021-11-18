@@ -24,8 +24,8 @@ public class HibernateUtil {
                 Map<String, String> settings = new HashMap<>();
                 settings.put(Environment.DRIVER, "org.postgresql.Driver");
                 settings.put(Environment.URL, "jdbc:postgresql://pg:5432/studs");
-                settings.put(Environment.USER, "sXXXXXX");
-                settings.put(Environment.PASS, "******");
+                settings.put(Environment.USER, "");
+                settings.put(Environment.PASS, "");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL9Dialect");
 
                 registryBuilder.applySettings(settings);

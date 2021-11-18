@@ -33,13 +33,11 @@ public class PointsCRUD {
     public PointsTable addPoint(PointsTable pointsTable) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        pointsTable.setId(null); // добавить новую запись, а не изменить существующую
+        pointsTable.setId(null);                // добавить новую запись, а не изменить существующую
         session.save(pointsTable);
         session.flush();
         session.close();
         return pointsTable;
     }
-
-
 
 }

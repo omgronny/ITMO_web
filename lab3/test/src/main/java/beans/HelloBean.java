@@ -1,63 +1,66 @@
 package beans;
 
-
-import model.DataBaseManager;
-import points.ValidPoint;
+import model.*;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 
 @ManagedBean
 @SessionScoped
 public class HelloBean  {
 
-    private ValidPoint validPoint = new ValidPoint();
+    private PointsTable pointsTable = new PointsTable();
 
-    private DataBaseManager dataBaseManager = new DataBaseManager();
+    private List<PointsTable> pointsTableList = new LinkedList<>();
 
-    private ArrayList<ValidPoint> validPoints;
-
-    private PointsCRUD pointsCRUD;
+    private PointsCRUD pointsCRUD = new PointsCRUD();
 
     {
-        try {
-            validPoints = pointsCRUD.getAll();
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
+        pointsTableList = pointsCRUD.getAll();
     }
 
     public void addPoint() {
         result();
-        System.out.println(validPoint.getX() + " " + validPoint.getY());
-        validPoints.add(0, validPoint);
-        pointsCRUD.addPoint(validPoint);
-        validPoint = new ValidPoint();
+        pointsCRUD.save(pointsTable);
+        pointsTableList.add(0, pointsTable);
+        pointsTable = new PointsTable();
     }
 
-    public ValidPoint getValidPoint() {
-        return validPoint;
+    public PointsTable getPointsTable() {
+        return pointsTable;
     }
 
-    public void setValidPoint(ValidPoint validPoint) {
-        this.validPoint = validPoint;
+    public void setPointsTable(PointsTable pointsTable) {
+        this.pointsTable = pointsTable;
     }
 
-    public ArrayList<ValidPoint> getValidPoints() {
-        return validPoints;
+    public List<PointsTable> getPointsTableList() {
+        return pointsTableList;
     }
 
-    public void setValidPoints(ArrayList<ValidPoint> validPoints) {
-        this.validPoints = validPoints;
+    public void setPointsTableList(List<PointsTable> pointsTableList) {
+        this.pointsTableList = pointsTableList;
+    }
+
+    public PointsCRUD getPointsCRUD() {
+        return pointsCRUD;
+    }
+
+    public void setPointsCRUD(PointsCRUD pointsCRUD) {
+        this.pointsCRUD = pointsCRUD;
     }
 
     public boolean validator() {
 
-        double r = validPoint.getR();
-        double x = validPoint.getX();
-        double y = validPoint.getY();
+        double r = pointsTable.getR();
+        double x = pointsTable.getX();
+        double y = pointsTable.getY();
 
         System.out.println(x + " " + y + " " + r);
 
@@ -74,11 +77,13 @@ public class HelloBean  {
     }
 
     public void result() {
-        this.validPoint.setResult(validator() ? "Point hit the area" : "Point did not hit the area");
+        this.pointsTable.setResult(validator() ? "Point hit the area" : "Point did not hit the area");
     }
 
     public void clean() {
-        validPoints = new ArrayList<>();
+        // System.out.println(dataBaseManager.removeAllPoints());
+        pointsTableList.forEach(pointsTable1 -> pointsCRUD.delete(pointsTable1));
+        pointsTableList = new LinkedList<>();
     }
 
 

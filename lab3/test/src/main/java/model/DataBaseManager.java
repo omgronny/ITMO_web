@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 public class DataBaseManager {
 
+
    private static final String DB_URL = "jdbc:postgresql://pg:5432/studs";
-   private static String USER = "s311702";
+   private static String USER = "";
    private static String PASS = "";
+
 
     private static final String TABLE_NAME = "POINTS";
 
@@ -95,4 +97,5 @@ public class DataBaseManager {
         }
 
     }
+
 }

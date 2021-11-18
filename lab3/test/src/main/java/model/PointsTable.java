@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "points")
@@ -8,7 +9,7 @@ public class PointsTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "x")
     private double x;
@@ -20,18 +21,24 @@ public class PointsTable {
     private double r;
 
     @Column(name = "result")
-    private double result;
+    private String result;
 
     public PointsTable() { }
 
-    public PointsTable(double x, double y, double r, double result) {
+    public PointsTable(double x, double y, double r, String result) {
         this.x = x;
         this.y = y;
         this.r = r;
         this.result = result;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public double getX() {
         return x;
@@ -57,11 +64,11 @@ public class PointsTable {
         this.r = r;
     }
 
-    public double getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(double result) {
+    public void setResult(String result) {
         this.result = result;
     }
 }
