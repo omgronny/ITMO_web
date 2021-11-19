@@ -2,8 +2,10 @@ package beans;
 
 import model.*;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,11 +21,18 @@ public class HelloBean  {
 
     private List<PointsTable> pointsTableList = new LinkedList<>();
 
-    private PointsCRUD pointsCRUD = new PointsCRUD();
+    @ManagedProperty(value = "#{resourceBean}")
+    private PointsCRUD pointsCRUD;
 
-    {
+    @PostConstruct
+    public void init() {
         pointsTableList = pointsCRUD.getAll();
     }
+
+//    private PointsCRUD pointsCRUD = new PointsCRUD();
+//    {
+//        pointsTableList = pointsCRUD.getAll();
+//    }
 
     public void addPoint() {
         result();

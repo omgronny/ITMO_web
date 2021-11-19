@@ -100,8 +100,8 @@ function f() {
     ctx.moveTo(220, 20);
     ctx.lineTo(230, 20);
 
-    ctx.moveTo(220, 100);
-    ctx.lineTo(230, 100);
+    ctx.moveTo(220, 110);
+    ctx.lineTo(230, 110);
 
     ctx.moveTo(315, 195);
     ctx.lineTo(315, 205);
@@ -140,26 +140,10 @@ function f() {
             let x = (Math.round(((x1 - 225) / 180 * 5) * 100) / 100);
             let y = ((Math.round((y1 - 200) / 180 * 5 * (-1) * 100) / 100));
 
-            let correct = corrector(x, y, r);
-            
-            let color = '#32b494';
-            if (!correct) {
-                color = '#ff0000';
-            }
-
-            obCanvas.beginPath();
-            obCanvas.arc(x1, y1, 5, 0, 2 * Math.PI, false);
-
-            obCanvas.fillStyle = color;
-            obCanvas.fill();
-            obCanvas.lineWidth = 1;
-            obCanvas.strokeStyle = color;
-            obCanvas.stroke();
+            let color = setColor(x,y,r);
+            art(x1, y1, color);
 
         }
-
-
-
     }
 
     let submitForm = document.forms[1];
@@ -169,14 +153,3 @@ function f() {
 
 }
 
-function corrector(x, y, r) {
-    let correct = false;
-    if (x >= 0 && y >= 0) {
-        correct =  x + y <= r;
-    } else if (x < 0 && y >= 0) {
-        correct =  x*x + y*y <= r*r;
-    } else if (x < 0 && y < 0) {
-        correct =  (-1)*x <= r && (-1)*y <= r/2;
-    }
-    return correct;
-}

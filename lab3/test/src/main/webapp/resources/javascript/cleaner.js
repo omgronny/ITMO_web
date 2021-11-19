@@ -1,6 +1,6 @@
 function cleanpoints() {
 
-    let tap = document.getElementById("j_idt29:cleaner:cleanTap");
+    let tap = document.getElementById("j_idt30:cleaner:cleanTap");
     tap.click();
 
     let r_value = document.getElementById("newEmployeeForm:r").value;
@@ -103,8 +103,8 @@ function cleanpoints() {
     ctx.moveTo(220, 20);
     ctx.lineTo(230, 20);
 
-    ctx.moveTo(220, 100);
-    ctx.lineTo(230, 100);
+    ctx.moveTo(220, 110);
+    ctx.lineTo(230, 110);
 
     ctx.moveTo(315, 195);
     ctx.lineTo(315, 205);

@@ -3,10 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
 
+@ManagedBean(name = "resourceBean")
+@ApplicationScoped
 public class PointsCRUD {
 
     public void save(PointsTable points) {
