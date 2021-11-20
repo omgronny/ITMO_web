@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -15,11 +16,13 @@ import javax.annotation.ManagedBean;
 import javax.annotation.Resource;
 
 import javax.ejb.Stateless;
+import javax.faces.bean.ApplicationScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 @ManagedBean
+@ApplicationScoped
 public class HibernateUtil {
 
     private static StandardServiceRegistry registry;
@@ -30,7 +33,7 @@ public class HibernateUtil {
 
     static Connection connection = null;
 
-    public static SessionFactory getSessionFactory() {
+    public synchronized static SessionFactory getSessionFactory() {
 
         if (sessionFactory == null) {
             try {
@@ -68,7 +71,7 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void close() {
+    public synchronized static void close() {
         if (registry != null) {
             StandardServiceRegistryBuilder.destroy(registry);
         }
