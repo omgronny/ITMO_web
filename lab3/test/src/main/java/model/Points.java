@@ -5,7 +5,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "points")
-public class PointsTable {
+public class Points {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +23,9 @@ public class PointsTable {
     @Column(name = "result")
     private String result;
 
-    public PointsTable() { }
+    public Points() { }
 
-    public PointsTable(double x, double y, double r, String result) {
+    public Points(double x, double y, double r, String result) {
         this.x = x;
         this.y = y;
         this.r = r;

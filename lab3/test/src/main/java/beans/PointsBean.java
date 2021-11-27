@@ -15,45 +15,41 @@ import java.util.List;
 
 @ManagedBean
 @SessionScoped
-public class HelloBean  {
+public class PointsBean  {
 
-    private PointsTable pointsTable = new PointsTable();
+    private Points pointsTable = new Points();
 
-    private List<PointsTable> pointsTableList = new LinkedList<>();
+    private List<Points> pointsTableList = new LinkedList<>();
 
     @ManagedProperty(value = "#{resourceBean}")
     private PointsCRUD pointsCRUD;
 
     @PostConstruct
-    public void init() {
+    public void postConstruct() {
         pointsTableList = pointsCRUD.getAll();
     }
 
-//    private PointsCRUD pointsCRUD = new PointsCRUD();
-//    {
-//        pointsTableList = pointsCRUD.getAll();
-//    }
 
-    public void addPoint() {
+    public void addPoint() throws Exception {
         result();
         pointsCRUD.save(pointsTable);
         pointsTableList.add(0, pointsTable);
-        pointsTable = new PointsTable();
+        pointsTable = new Points();
     }
 
-    public PointsTable getPointsTable() {
+    public Points getPointsTable() {
         return pointsTable;
     }
 
-    public void setPointsTable(PointsTable pointsTable) {
+    public void setPointsTable(Points pointsTable) {
         this.pointsTable = pointsTable;
     }
 
-    public List<PointsTable> getPointsTableList() {
+    public List<Points> getPointsTableList() {
         return pointsTableList;
     }
 
-    public void setPointsTableList(List<PointsTable> pointsTableList) {
+    public void setPointsTableList(List<Points> pointsTableList) {
         this.pointsTableList = pointsTableList;
     }
 
@@ -90,9 +86,8 @@ public class HelloBean  {
     }
 
     public void clean() {
-        // System.out.println(dataBaseManager.removeAllPoints());
-        pointsTableList.forEach(pointsTable1 -> pointsCRUD.delete(pointsTable1));
-        pointsTableList = new LinkedList<>();
+       pointsTableList.forEach(pointsTable1 -> pointsCRUD.delete(pointsTable1));
+       pointsTableList = new LinkedList<>();
     }
 
 
