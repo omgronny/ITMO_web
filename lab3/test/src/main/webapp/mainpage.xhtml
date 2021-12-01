@@ -88,17 +88,17 @@
 
             <div>
                 <h:outputLabel for="x" value="X Coordinate"/>
-                <p:inputText style="margin-left: 10px" id="x" value="#{helloBean.pointsTable.x}"/>
+                <p:inputText style="margin-left: 10px" id="x" value="#{pointsBean.pointsTable.x}"/>
                 <p:slider for="x" style="width: 200px; margin-left: 100px; margin-top: 10px" minValue="-5" maxValue="5" step="0.1"/>
 
             </div>
             <div>
                 <h:outputLabel for="y" value="Y Coordinate"/>
-                <h:inputText id="y" name="par_y" style="width: 200px; margin-left: 10px" class="only_number" size="40" value="#{helloBean.pointsTable.y}"/>
+                <h:inputText id="y" name="par_y" style="width: 200px; margin-left: 10px" class="only_number" size="40" value="#{pointsBean.pointsTable.y}"/>
             </div>
             <div>
                 <h:outputLabel style="margin-top: 20px" for="r" value="Parameter R" />
-                <h:selectOneMenu onchange=" f() " style="margin-left: 15px" id="r" value="#{helloBean.pointsTable.r}">
+                <h:selectOneMenu onchange=" f() " style="margin-left: 15px" id="r" value="#{pointsBean.pointsTable.r}">
                     <f:selectItem itemValue = "5" itemLabel = "5" />
                     <f:selectItem itemValue = "4" itemLabel = "4" />
                     <f:selectItem itemValue = "3" itemLabel = "3" />
@@ -110,7 +110,7 @@
             <button type="button"  style="margin-top: 100px; background-color: orange; width: 100px" id="fakesubbutton" onclick="validator()">
             Submit</button>
 
-            <h:commandButton style="margin-top: 100px; background-color: orange; visibility: hidden" id="subbutton" value="Submit" action="#{helloBean.addPoint()}">
+            <h:commandButton style="margin-top: 100px; background-color: orange; visibility: hidden" id="subbutton" value="Submit" action="#{pointsBean.addPoint()}">
                 <f:ajax execute="newEmployeeForm" render="employeeTable" />
             </h:commandButton>
 
@@ -130,19 +130,18 @@
 
         <h:outputScript library="javascript" name="clicker.js"></h:outputScript>
 
-<!--        <h:outputScript name="javas/clicker.js" />-->
 
     </td></tr>
 
 </table>
 
     <h:panelGroup id="employeeTable">
-        <h:dataTable style="text-align: center" value="#{helloBean.pointsTableList}" var="pointsTable">
+        <h:dataTable style="text-align: center" value="#{pointsBean.pointsTableList}" var="pointsTable">
             <h:column>
                 <f:facet name="header">
                     <h:form name="cleaner" id="cleaner">
                         <button type="button" id="fakecleaner" style="background-color: orange; width: 100px" onclick="cleanpoints()">Clean</button>
-                        <h:commandButton style="visibility: hidden" id="cleanTap" action="#{helloBean.clean()}" value="Submit">
+                        <h:commandButton style="visibility: hidden" id="cleanTap" action="#{pointsBean.clean()}" value="Submit">
                             <f:ajax render="employeeTable"/>
                         </h:commandButton>
                     <h:outputScript library="javascript" name="cleaner.js"></h:outputScript>

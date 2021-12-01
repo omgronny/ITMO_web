@@ -3,12 +3,9 @@ package beans;
 import model.*;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +25,6 @@ public class PointsBean  {
     public void postConstruct() {
         pointsTableList = pointsCRUD.getAll();
     }
-
 
     public void addPoint() throws Exception {
         result();
