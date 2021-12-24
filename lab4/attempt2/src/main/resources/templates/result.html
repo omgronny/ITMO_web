@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Lab 4</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <style>
+
+        @media screen and (min-device-width: 1040px) {
+            .orange {
+                color: orange;
+            }
+
+            .back_orange {
+                background-color: orange;
+            }
+
+        }
+
+        @media screen and (max-device-width: 1039px) {
+            .orange {
+                color: red;
+            }
+
+            .back_orange {
+                background-color: red;
+            }
+
+            .element {
+                width: 100%;
+            }
+            .class-form {
+                width: 100%;
+            }
+
+
+        }
+
+        table {
+            border: 1px solid grey;
+            width: 100%;
+        }
+
+        th {
+            font-size: 200%;
+            background-color: #32b494;
+            border: 1px solid grey;
+        }
+
+        td {
+            background-color: #384349;
+            color: #ebedee;
+            border: 1px solid grey;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .head {
+            text-align: center;
+            color: #ebedee;
+            background-color: #384349;
+            padding: 40px;
+            font-size: 300%;
+            font-family: fantasy;
+        }
+
+        .wrapper {
+            /*display: flex;*/
+        }
+        .res-table {
+            width: 100%;
+        }
+
+        not_valid {
+            text-align: center;
+            font-size: 150%;
+            color: red;
+        }
+
+        table input {
+            margin: 5px;
+        }
+
+        caption pars {
+            color: orange;
+        }
+
+        now_time {
+            text-align: center;
+            font-size: 100%;
+            color: orange;
+        }
+
+        numbers {
+            color: orange;
+        }
+
+    </style>
+</head>
+
+<body id="root" style = "background-color: #384349;">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script src="js/test.js"></script>
+
+<div id="app"></div>
+
+<script src="js/validator.js"></script>
+<script src="js/main.js"></script>
+<script src="js/artist.js"></script>
+<script src="js/clicker.js"></script>
+<script src="js/changer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Lab 4</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+
+        @media screen and (min-width: 829px) {
+            .orange {
+                color: orange;
+            }
+
+            .back_orange {
+                background-color: orange;
+            }
+
+        }
+
+        @media screen and (max-width: 828px) {
+            .orange {
+                color: red;
+            }
+
+            .back_orange {
+                background-color: red;
+            }
+
+        }
+
+
+        table {
+            border: 1px solid grey;
+            width: 100%;
+        }
+
+        th {
+            font-size: 200%;
+            background-color: #32b494;
+            border: 1px solid grey;
+        }
+
+        td {
+            background-color: #384349;
+            color: #ebedee;
+            border: 1px solid grey;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .head {
+            color: #ebedee;
+            background-color: #384349;
+            padding: 40px;
+            font-size: 300%;
+            font-family: fantasy;
+        }
+
+        not_valid {
+            text-align: center;
+            font-size: 150%;
+            color: red;
+        }
+
+        table input {
+            margin: 5px;
+        }
+
+        caption pars {
+            color: orange;
+        }
+
+        now_time {
+            text-align: center;
+            font-size: 100%;
+            color: orange;
+        }
+
+        #x1,#x2,#x3,#x4,#x5,#x6,#x7,#x8,#x9 {
+            background-color: orange
+        }
+
+        numbers {
+            color: orange;
+        }
+
+        #circle {
+            border: 1px solid red;
+        }
+
+        .timer {
+            text-align: center;
+        }
+
+
+
+    </style>
+</head>
+
+<body style = "background-color: #384349;">
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<table>
+
+    <caption class="head">
+        Roman Glinskikh <number class="orange">P3212</number>. Variant <number class="orange">12042</number>
+    </caption>
+
+    <tr><th>Log In</th></tr>
+
+    <td>
+
+        <div th:if="${param.error}">
+            User exists!
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+        <form th:action="@{/registration}" method="post">
+            <p><b>UserName : </b> <input type="text" name="username"/></p>
+            <p style="margin-left: 10px"><b> Password:</b> <input type="password" name="psw"/> </p>
+        <input style="background-color: orange; border-radius: 5px" id="subbutton" type="submit" value="Log In" />
+        </form>
+
+        <form style="float: right" action="/result" method="get">
+            <input style="background-color: orange; border-radius: 5px" id="regburron" type="submit" value="Back to sign in" />
+        </form>
+
+    </td>
+
+
+</table>
+
+</body>
+
+</html>
