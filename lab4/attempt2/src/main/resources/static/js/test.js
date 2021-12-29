@@ -66,7 +66,7 @@ function validation_r(par_r, isHTML, isBig) {
         }
     }
 
-    elem.innerHTML = 'Input field';
+    elem.innerHTML = 'Result';
 
     return true;
 

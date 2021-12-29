@@ -14,10 +14,10 @@ jQuery('.element').click(function(e) { // форма тоже создает т�
         let xnonKras = e.clientX - target.left;
         let ynonKras = e.clientY - target.top;
 
-        //alert(window.innerWidth*0.3);
+        //alert(document.documentElement.clientWidth);
 
-        if (window.innerWidth*0.3 > 450) {
-                xnonKras = xnonKras - (window.innerWidth*0.3 - 450) / 2;
+        if (document.documentElement.clientWidth <= 828) {
+                xnonKras = xnonKras - 200;
         }
 
         // sessionStorage.setItem("points" + sessionStorage.length.toString(), xnonKras.toString());

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<meta name="viewport" content="width=device-width">
 <head>
     <meta charset="UTF-8">
     <title>Web Lab 4</title>
@@ -15,6 +16,24 @@
             .back_orange {
                 background-color: orange;
             }
+
+            .element {
+                width: 30%;
+                float: right;
+            }
+            .class-form {
+                width: 70%;
+            }
+
+            .big-div {
+                display: flex;
+                /*height: 400px;*/
+            }
+
+            .back_orange-but {
+                background-color: orange;
+            }
+
 
         }
 
@@ -32,6 +51,49 @@
             }
             .class-form {
                 width: 100%;
+            }
+            .back_orange-but {
+                background-color: orange;
+            }
+
+
+        }
+
+        @media screen and (max-device-width: 828px) {
+
+            .element {
+                width: 100%;
+            }
+
+            .class-form {
+                width: 100%;
+            }
+
+            #pointsform {
+                padding-left: 200px;
+            }
+
+            #circle {
+                padding-left: 200px;
+            }
+
+            .main-form-elem {
+                margin-left: auto;
+                margin-right: auto;
+                width: 70%;
+                height: 40px;
+            }
+
+            .class-form {
+                left: 100px;
+            }
+
+            .back_orange-but {
+                margin-left: auto;
+                margin-right: auto;
+                width: 70%;
+                height: 40px;
+                background-color: orange;
             }
 
 
@@ -99,6 +161,15 @@
             color: orange;
         }
 
+        .element {
+            height: 400px;
+        }
+
+        .class-form {
+            height: 400px;
+        }
+
+
     </style>
 </head>
 
@@ -110,7 +181,8 @@
 <div id="app"></div>
 
 <script src="js/validator.js"></script>
-<script src="js/main.js"></script>
+<!--<script src="js/main.js"></script>-->
+<script src="js/main-block-test.js"></script>
 <script src="js/artist.js"></script>
 <script src="js/clicker.js"></script>
 <script src="js/changer.js"></script>

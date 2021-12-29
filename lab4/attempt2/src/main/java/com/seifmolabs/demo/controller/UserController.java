@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
 
+import static com.seifmolabs.demo.config.RestAuthenticationEntryPoint.isRequestFromAuthenticatedUser;
+
 @Controller
 public class UserController {
 
@@ -24,24 +26,30 @@ public class UserController {
     public String save() {
         System.out.println("Попали в logout");
         SecurityContextHolder.clearContext();
-        return "login";
+        return "redirect:/login";
     }
 
     @PostMapping(value = "/")
     public String rootSave() {
+        System.out.println("post root");
         return save();
     }
 
 
     @GetMapping(value = "/")
     public String rootRead() {
-        return read();
+        //return read();
+        return "result";
     }
 
     @GetMapping(value = "/result")
     public String read() {
 
         System.out.println("Попали в read users");
+
+        if (!isRequestFromAuthenticatedUser()) {
+            throw new ForbiddenException();
+        }
 
         return "result";
 
@@ -70,3 +78,4 @@ public class UserController {
     }
 
 }
+

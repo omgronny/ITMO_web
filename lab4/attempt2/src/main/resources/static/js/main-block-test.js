@@ -9,16 +9,17 @@ Vue.component('submit-form', {
            y: '',
            r: '',
            result: '',
-           id: ''
+           id: '',
+           authorName: ''
        }
    },
     template:
-    '<div>' +
-        '<p><b>X:</b><br><input style="margin: 10px;" type="text" v-model="x" id="x" name="par_x" size="40"></p>' +
-        '<p><b>Y:</b><br><input style="margin: 10px;" type="text" v-model="y" id="y" name="par_y" size="40"></p>' +
-        '<p><b>R:</b><br><input style="margin: 10px;" onchange="f()" type="text" value="3" v-model="r" id="r" name="par_r" size="40"></p>' +
-        '<input style="border-radius: 5px" class="back_orange" id="subbutton" type="button" value="Submit" @click="sbm" />' +
-    '</div>',
+        '<div>' +
+            '<p><b>X:</b><br><input class="main-form-elem" style="margin: 10px;" type="text" v-model="x" id="x" name="par_x" size="40"></p>' +
+            '<p><b>Y:</b><br><input class="main-form-elem" style="margin: 10px;" type="text" v-model="y" id="y" name="par_y" size="40"></p>' +
+            '<p><b>R:</b><br><input class="main-form-elem" style="margin: 10px;" onchange="f()" type="text" value="3" v-model="r" id="r" name="par_r" size="40"></p>' +
+            '<input style="border-radius: 5px" class="back_orange-but" id="subbutton" type="button" value="Submit" @click="sbm" />' +
+        '</div>',
 
     methods: {
        sbm: function () {
@@ -58,28 +59,34 @@ Vue.component('messages-list', {
        '    <h2 class="head">' +
        '        Roman Glinskikh <numbers class="orange">P3212</numbers>. Variant <numbers class="orange">12042</numbers>' +
        '    </h2>' +
-       '<div style="width: 100%; margin-bottom: 15px">' +
+       '<div class="big-div">' +
        '<div class="class-form">' +
-
-       '        <div style="align-content: center" id="pointsform">' +
+       '        <div id="pointsform">' +
        '        <submit-form :messages="messages" />' +
+                '</div>' +
        '</div>' +
-       '</div>' +
-       '    <div class="element">' +
 
+       '<div class="element">' +
        '        <canvas id="circle"></canvas>' +
-
-       '    </div>' +
-
        '</div>' +
-       '<table class="res-table">' +
-       '    <tr><th id="elem" colspan="4" width="70%">Result</th><th></th></tr>' +
-       '    <tr class="timer"><td>Time of running</td><td> X </td><td>Y</td><td>R</td><td>Result</td></tr>' +
+
+        '</div>' +
+       '<table>' +
+       '    <tr><th colspan="4" width="70%" id="elem">Result</th><th>' +
+       // '<form th:action="@{/result}" method="post">' +
+       // '    <input type="submit" class="back_orange" value="Sign Out"/>' +
+       // '</form>' +
+       '<form action="/result" method="post">' +
+       '    <input type="submit" class="back_orange" value="Sign Out"/>' +
+       '</form>' +
+       '</th></tr>' +
+       '    <tr class="timer"><td>Author</td><td> X </td><td>Y</td><td>R</td><td>Result</td></tr>' +
        '<tr v-for="message in messages">' +
-       '<td>0</td><td> {{message.x}} </td><td>{{message.y}}</td><td>{{message.r}}</td><td>{{message.result}}</td>' +
+       '<td>{{message.authorName}}</td><td> {{message.x}} </td><td>{{message.y}}</td><td>{{message.r}}</td><td>{{message.result}}</td>' +
        '</tr>' +
        '</table>' +
        '</div>',
+
     created: function () {
         messageApi.get().then(result =>
             result.json().then( data =>
